@@ -17,13 +17,18 @@ namespace MvcStartApp
 
         public async Task AddRequest(Request request)
         {
-            // Добавление пользователя
+            // Добавление запроса
             var entry = _context.Entry(request);
             if (entry.State == EntityState.Detached)
                 await _context.Requests.AddAsync(request);
 
             // Сохранение изенений
             await _context.SaveChangesAsync();
+        }
+        public async Task<Request[]> GetRequests()
+        {
+            // Получим все запросы
+            return await _context.Requests.ToArrayAsync();
         }
     }
 }
